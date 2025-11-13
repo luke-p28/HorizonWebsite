@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Horizon Skills Academy | Home</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="hero" role="banner" aria-label="Hero">
+            <div class="hero-inner">
+                <h1 style="color: var(--text);">Horizon Skills Academy</h1>
+            </div>
+        </header>
+
+        <main class="container" role="main">
+            <section class="card" id="about">
+                <h2>About Us</h2>
+                <p> We are a government-funded college specifically for high-demand trades and technical careers. Our goal is to address housing insecurity by giving opportunities for more skilled workers in the workforce. By offering cheap training with direct pathways into essential and high-paying jobs, financially struggling individuals can quickly enter the workforce as a valuable member and hopefully afford stable housing. Our solution restores independence and dignity for unhoused individuals, rather than having them rely on temporary shelter systems. It also supports labour shortages in healthcare, trades, and infrastructure, industries Canada is already desperate to fill.</p>
+            </section>
+
+            <section class="card" id="programs">
+                <h2>Learn more</h2>
+                <form> 
+                    <p> Interested in learning more about our programs? Enter your email below to get more information! </p>
+                    <label for="name"> Name: </label>
+                    <br>
+                    <input type="text" id="name" name="name"/>
+                    <br>
+                    <label for="email"> Email:          </label>
+                    <br>
+                    <input type="email" id="email" name="email" required />
+                    <br>
+                    <button id="submit-button" type="submit" onclick="handleSubmit(event)"> Submit </button>
+                </form>
+            </section>
+
+            <section class="card" aria-live="polite">
+                <h2> Job sector of the day: <span id="job-sector"></span></h2>
+                <p class="stat"> Example job: <strong><span id="job-name"></span></strong></p>
+                <p class="stat"> Sector outlook: <strong><span id="job-outlook"></span></strong></p>
+                <p class="stat"> Sector average salary: <strong><span id="job-salary"></span></strong></p>
+            </section>
+
+            <figure class="original-image">
+                <img width="500" src="/Designer.png" alt="Hero image" />
+            </figure>
+        </main>
+
+        <script>
+            fetch('http://localhost:3000/jobdata')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('job-name').textContent = data.jobTitle;
+                    document.getElementById('job-sector').textContent = data.category;
+                    document.getElementById('job-outlook').textContent = data.outlook;
+                    document.getElementById('job-salary').textContent = '$' + data.wage + ' /hour';
+                    console.log(data);
+                });
+            function handleSubmit(event) {
+                event.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                document.getElementById('name').value = "";
+                document.getElementById('email').value = "";
+                alert(`Thank you, ${name}! We will send more information to ${email}.`);
+            }
+        </script>
+    </body>
+</html>
