@@ -48,7 +48,7 @@
         </main>
 
         <script>
-            fetch('http://localhost:3000/jobdata')
+            fetch('/jobdata')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('job-name').textContent = data.jobTitle;

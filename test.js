@@ -1,20 +1,9 @@
-import puppeteer from 'puppeteer';
-(async () => {
- const browser = await puppeteer.launch();
- console.log('Browser launched');
- const page = await browser.newPage();
- console.log('New page created');
- let retries = 3;
- while (retries > 0) {
-    try {
-    await page.goto('https://www.jobbank.gc.ca/marketreport/summary-occupation/3363/ON', {timeout: 60000});
-    break;
-    } catch (error) {
-        console.error('Error navigating to the page:', error, 'Retries left:', retries - 1);
-        retries--;
-    }
-    }
- const content = await page.content();
- console.log(content);
- await browser.close();
-})();
+import express from 'express';
+const app = express();
+app.get("/", (req, res) => {
+    res.sendFile("./site/style.css", { root: '.' });
+});
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});
+fetch('http://localhost:3000/').then(response => response.text()).then(data => console.log(data));
