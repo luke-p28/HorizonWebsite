@@ -11,7 +11,7 @@ let url = process.env.URL || 'https://www.jobbank.gc.ca/marketreport/summary-occ
 const outName = 'output/output';
 const outPath = "./"+outName;
 
-async function fetchAndSave(attemptsLeft = 3, i) {
+async function fetchAndSave(attemptsLeft = 3, i) 
     console.log(`Fetching ${url} (attempts left: ${attemptsLeft}, i: ${i})`);
     try {
         console.log('Sending request to', url);
