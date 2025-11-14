@@ -8,7 +8,7 @@ function analyseHTML(outputNum) {
             reject(err);
             return;
         }
-        if (!data.includes("Outlook") && !data.includes("Prospects")) {
+        if (!data.includes("Prospects")) {
             reject('File does not contain valid HTML');
             return;
         }
